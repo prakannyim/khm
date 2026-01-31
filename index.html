@@ -3,11 +3,210 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="KHM Voice — plateforme de voix Khmer et contenus éducatifs multilingues." />
   <title>KHM Voice</title>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2e;
+      --text:#eaf0ff;
+      --muted:#b8c4e6;
+      --line:rgba(255,255,255,.10);
+      --accent:#8ACF57;   /* vert eco */
+      --accent2:#2C6E49;  /* vert profond */
+      --warn:#ffd166;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 15% -10%, rgba(138,207,87,.22), transparent 55%),
+                  radial-gradient(900px 500px at 85% 0%, rgba(44,110,73,.22), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit}
+    .wrap{max-width:1050px;margin:0 auto;padding:28px 16px 70px}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:10px 12px;border:1px solid var(--line);border-radius:16px;
+      background: rgba(15,26,46,.65);backdrop-filter: blur(8px);
+    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .dot{
+      width:12px;height:12px;border-radius:50%;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 16px rgba(138,207,87,.55);
+    }
+    .brand strong{letter-spacing:.5px}
+    .pill{
+      font-size:12px;padding:6px 10px;border-radius:999px;
+      border:1px solid var(--line);color:var(--muted);
+    }
+    .hero{padding:34px 6px 10px}
+    h1{margin:14px 0 10px;font-size:38px;line-height:1.1}
+    .subtitle{max-width:760px;color:var(--muted);font-size:16px;line-height:1.6}
+    .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 14px;border-radius:14px;text-decoration:none;
+      border:1px solid var(--line);background: rgba(255,255,255,.04);
+      transition: transform .06s ease, background .15s ease;
+    }
+    .btn:hover{transform: translateY(-1px);background: rgba(255,255,255,.07)}
+    .btn.primary{
+      border-color: rgba(138,207,87,.55);
+      background: linear-gradient(180deg, rgba(138,207,87,.20), rgba(44,110,73,.18));
+    }
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:18px}
+    .card{
+      grid-column: span 12;
+      border:1px solid var(--line);border-radius:18px;
+      background: rgba(15,26,46,.62);backdrop-filter: blur(8px);
+      padding:16px 16px 14px;
+    }
+    .card h2{margin:0 0 8px;font-size:16px}
+    .card p{margin:0;color:var(--muted);line-height:1.6;font-size:14px}
+    .cols-6{grid-column: span 12}
+    @media (min-width: 900px){
+      .cols-6{grid-column: span 6}
+      h1{font-size:46px}
+    }
+    .kpis{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .kpi{
+      padding:9px 10px;border-radius:14px;border:1px solid var(--line);
+      color:var(--muted);font-size:13px;
+      background: rgba(255,255,255,.03);
+    }
+    .status{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      margin-top:10px;padding-top:10px;border-top:1px solid var(--line);
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:12px;color:var(--muted);
+      padding:6px 10px;border:1px solid var(--line);border-radius:999px;
+    }
+    .led{width:8px;height:8px;border-radius:50%;background:var(--warn);box-shadow:0 0 10px rgba(255,209,102,.35)}
+    footer{
+      margin-top:22px;color:rgba(184,196,230,.85);
+      font-size:12px;line-height:1.6;
+      border-top:1px solid var(--line);padding-top:14px;
+    }
+    .small{font-size:12px;color:rgba(184,196,230,.85)}
+    code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      padding:2px 6px;border-radius:10px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.09);
+    }
+  </style>
 </head>
-<body style="font-family:Arial;max-width:900px;margin:40px auto;padding:0 16px;">
-  <h1>KHM Voice</h1>
-  <p>Bienvenue. Site en construction.</p>
-  <p>Contact / infos bientôt.</p>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <div>
+          <strong>KHM VOICE</strong><br />
+          <span class="small">Voix Khmer • Contenus éducatifs • Multilingue</span>
+        </div>
+      </div>
+      <span class="pill">Site officiel: khmvoice.org</span>
+    </div>
+
+    <section class="hero">
+      <h1>Une voix Khmer moderne,<br/>au service de l’éducation.</h1>
+      <p class="subtitle">
+        KHM Voice est une plateforme de narration et d’assistance vocale destinée à la communauté Khmer et au public global,
+        avec une approche <b>sécurité d’abord</b> : les calculs lourds et les données sensibles restent sur votre serveur.
+      </p>
+
+      <div class="cta">
+        <a class="btn primary" href="#roadmap">Voir la roadmap</a>
+        <a class="btn" href="#status">Statut du service</a>
+        <a class="btn" href="#contact">Contact</a>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card cols-6">
+        <h2>Mission</h2>
+        <p>
+          Produire des contenus (TV, podcast, TikTok) et des réponses vocales fiables en
+          <b>KH / EN / FR</b>, avec des scripts contrôlés et une voix cohérente (Coach_OM).
+        </p>
+        <div class="kpis">
+          <span class="kpi">🎙️ Voix Khmer (dataset privé)</span>
+          <span class="kpi">🧠 Worker Python local</span>
+          <span class="kpi">🔐 HTTPS + sécurité</span>
+        </div>
+      </div>
+
+      <div class="card cols-6">
+        <h2>Architecture (Phase 1)</h2>
+        <p>
+          Ce site est une vitrine sécurisée. L’IA et le traitement audio restent localement.
+          Plus tard, une API légère pourra exposer <code>/status</code> et <code>/ask</code> pour piloter votre worker.
+        </p>
+        <div class="kpis">
+          <span class="kpi">☁️ Render = façade</span>
+          <span class="kpi">🏠 Serveur local = calculs</span>
+          <span class="kpi">🚫 Pas de ngrok</span>
+        </div>
+      </div>
+
+      <div class="card" id="roadmap">
+        <h2>Roadmap</h2>
+        <p>
+          <b>Phase 1</b> — Domaine + vitrine + HTTPS (fait) • <b>Phase 2</b> — API Flask légère sur Render •
+          <b>Phase 3</b> — Pipeline TTS/Avatar (D-ID) + diffusion.
+        </p>
+        <div class="kpis">
+          <span class="kpi">✅ Phase 1: OK</span>
+          <span class="kpi">⏭️ Phase 2: API</span>
+          <span class="kpi">⏭️ Phase 3: média</span>
+        </div>
+      </div>
+
+      <div class="card" id="status">
+        <h2>Statut</h2>
+        <p>
+          Le site est en ligne. Si tu ajoutes une API, on affichera ici un statut temps réel.
+        </p>
+        <div class="status">
+          <span class="badge"><span class="led" aria-hidden="true"></span> API: bientôt</span>
+          <span class="badge">HTTPS: actif</span>
+          <span class="badge">Données sensibles: local</span>
+        </div>
+        <p class="small" style="margin-top:10px;">
+          À venir: bouton “Test API” (quand l’endpoint sera disponible).
+        </p>
+      </div>
+
+      <div class="card" id="contact">
+        <h2>Contact</h2>
+        <p>
+          Pour le moment, ajoute ici ton email ou un formulaire quand tu seras prêt.
+          (On peut aussi mettre un bouton vers tes réseaux sociaux.)
+        </p>
+        <p class="small" style="margin-top:10px;">
+          Suggestions: <code>contact@khmvoice.org</code> (optionnel), ou un simple lien vers un formulaire.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <div><b>Disclaimer</b> : ce site est une vitrine. Les informations partagées ne constituent pas un avis médical, légal ou financier.</div>
+      <div>© <span id="y"></span> KHM Voice — Tous droits réservés.</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
