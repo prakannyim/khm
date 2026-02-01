@@ -95,6 +95,36 @@ select{
   .btn { font-size: 18px; padding: 14px 12px; }
   select { font-size: 18px; padding: 14px 12px; }
 }
+/* Landscape / petite hauteur : compacter pour ne rien couper */
+@media (max-height: 520px) {
+  .tv {
+    grid-template-rows: 90px 1fr 96px; /* header / video / controls */
+  }
+
+  .tv-header { padding: 10px; }
+  .tv-title  { font-size: 20px; padding: 6px 12px; }
+
+  .tv-controls { padding: 10px; gap: 10px; }
+  .btn { font-size: 16px; padding: 12px 10px; border-radius: 14px; }
+  select { font-size: 16px; padding: 12px 10px; border-radius: 14px; }
+
+  .video-box{
+    width: min(860px, 96vw);
+    /* la hauteur réelle doit tenir dans l'écran */
+    max-height: calc(100vh - 90px - 96px - 24px);
+  }
+}
+@media (max-height: 680px) and (min-height: 521px) {
+  .tv { grid-template-rows: 110px 1fr 110px; }
+  .btn { font-size: 18px; padding: 14px 12px; }
+  select { font-size: 18px; padding: 14px 12px; }
+  .video-box{ max-height: calc(100vh - 110px - 110px - 24px); }
+}
+@media (max-height: 420px) {
+  body { overflow-y: auto; }   /* seulement très petit */
+  .tv  { height: auto; }
+}
+
 </style>
 </head>
 
@@ -198,7 +228,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   });
 })();
 </script>
-
+<script>
   const sel = document.getElementById("langSel");
   const frame = document.getElementById("ytFrame");
   const journalLink = document.getElementById("journalLink");
@@ -222,7 +252,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
     localStorage.setItem("khm_lang", v);
     location.search = "?lang=" + v; // recharge la page avec la langue
   });
-})();
 </script>
 <script>
   if ("serviceWorker" in navigator) {
