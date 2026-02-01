@@ -77,7 +77,13 @@ body {
 <p><br><br></p>
 <!-- HEADER -->
 <header class="header">
- 
+ <div style="margin-top:8px;">
+  <a id="backHome" href="index.html?lang=fr"
+     style="color:#2C6E49;font-weight:bold;text-decoration:none;">
+    ← Retour à l’accueil
+  </a>
+</div>
+
   <h1>KHM TV Journal</h1>
 </header>
 
@@ -88,23 +94,30 @@ body {
     Information, culture et analyse pour la communauté khmère
     et le public international.
   </p>
-
-  <!-- VIDEO -->
-  <div class="video-wrapper">
-    <div class="video-frame">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/-EnKpDKxe7w?rel=0"
-        title="KHM TV Journal"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-
+<div style="text-align:center;margin:18px 0;">
+  <label for="langSel" style="font-weight:bold;margin-right:8px;">Langue:</label>
+  <select id="langSel" style="padding:6px 10px;border-radius:8px;border:1px solid #ccc;">
+    <option value="fr">Français</option>
+    <option value="en">English</option>
+    <option value="kh">ខ្មែរ</option>
+  </select>
 </div>
+<div class="video-wrapper">
+  <div class="video-frame">
+    <iframe
+      id="ytFrame"
+      src=""
+      title="KHM TV Journal"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>
+
 <p style="text-align:center;margin-top:16px;">
-  <a href="journal.html" style="color:#2C6E49;font-weight:bold;text-decoration:none;">
-    ▶ Voir les épisodes précédents (Archives)
+  <a id="journalLink" href="journal.html?lang=fr"
+     style="color:#2C6E49;font-weight:bold;text-decoration:none;">
+    ▶ Archives / Journal
   </a>
 </p>
   <div class="section">
@@ -130,6 +143,41 @@ body {
 
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+<script>
+(function(){
+  // 1) Mapping des IDs YouTube par langue
+  // Remplace plus tard par les vrais IDs
+  const VIDEO_ID = {
+    fr: "https://www.youtube-nocookie.com/embed/ID_EP2?rel=0",
+    en: "https://www.youtube-nocookie.com/embed/ID_EP2?rel=0",
+    kh: "https://www.youtube-nocookie.com/embed/ID_EP2?rel=0"
+  };
+
+  const sel = document.getElementById("langSel");
+  const frame = document.getElementById("ytFrame");
+  const journalLink = document.getElementById("journalLink");
+
+  // 2) Déterminer la langue (URL > localStorage > défaut)
+  const params = new URLSearchParams(location.search);
+  const lang = params.get("lang") || localStorage.getItem("khm_lang") || "fr";
+  const safeLang = (lang === "fr" || lang === "en" || lang === "kh") ? lang : "fr";
+
+  sel.value = safeLang;
+  localStorage.setItem("khm_lang", safeLang);
+
+  // 3) Appliquer l'iframe + le lien Journal
+  const id = VIDEO_ID[safeLang];
+  frame.src = "https://www.youtube-nocookie.com/embed/" + id + "?rel=0";
+  journalLink.href = "journal.html?lang=" + safeLang;
+
+  // 4) Changement de langue
+  sel.addEventListener("change", () => {
+    const v = sel.value;
+    localStorage.setItem("khm_lang", v);
+    location.search = "?lang=" + v; // recharge la page avec la langue
+  });
+})();
 </script>
 
 </body>

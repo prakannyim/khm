@@ -101,5 +101,15 @@
     <b>Disclaimer :</b> contenus informatifs et éducatifs. Pas un avis médical, juridique ou financier.
   </footer>
 </div>
+<script>
+(function(){
+  const params = new URLSearchParams(location.search);
+  const lang = params.get("lang") || localStorage.getItem("khm_lang") || "fr";
+  const safeLang = (lang === "fr" || lang === "en" || lang === "kh") ? lang : "fr";
+  localStorage.setItem("khm_lang", safeLang);
+  document.getElementById("backHome").href = "index.html?lang=" + safeLang;
+})();
+</script>
+
 </body>
 </html>
