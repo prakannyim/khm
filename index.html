@@ -7,119 +7,95 @@
 <meta name="description" content="KHM Voice – Voix Khmer, journal TV, podcast et contenus éducatifs multilingues.">
 
 <style>
-body{
-  margin:0;
+body {
+  margin: 0;
   font-family: "Times New Roman", Georgia, serif;
-  background:#f4f6f4;
-  color:#1f2a24;
+  background: #f3f7f4;
+  color: #1f2a24;
 }
-header{
-  background:#ffffff;
-  border-bottom:3px solid #2C6E49;
+
+/* Header */
+.header {
+  width: 100%;
+  background: linear-gradient(
+    rgba(0,0,0,0.25),
+    rgba(0,0,0,0.25)
+  ),
+  url("assets/khmvoice_img.png") center / cover no-repeat;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.container{
-  max-width:980px;
-  margin:auto;
-  padding:24px 16px;
+
+.header h1 {
+  color: #ffffff;
+  font-size: 42px;
+  letter-spacing: 2px;
+  background: rgba(0,0,0,0.4);
+  padding: 12px 24px;
+  border-radius: 6px;
 }
-.logo{
-  display:flex;
-  align-items:center;
-  gap:16px;
+
+/* Main content */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 16px;
 }
-.logo img{
-  height:64px;
+
+/* Video */
+.video-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
 }
-.logo h1{
-  margin:0;
-  font-size:28px;
-  letter-spacing:1px;
+
+.video-frame {
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
-.section{
-  background:#ffffff;
-  margin-top:24px;
-  padding:24px;
-  border-left:6px solid #8ACF57;
-}
-.section h2{
-  margin-top:0;
-  color:#2C6E49;
-}
-.badge{
-  display:inline-block;
-  padding:6px 12px;
-  border:1px solid #2C6E49;
-  border-radius:20px;
-  font-size:13px;
-  margin-right:8px;
-}
-footer{
-  margin-top:40px;
-  padding:20px;
-  font-size:13px;
-  color:#555;
-  border-top:1px solid #ccc;
-  background:#ffffff;
-}
-a{
-  color:#2C6E49;
-  text-decoration:none;
+
+.video-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="container logo">
-    <img src="assets/logo-khmvoice.png" alt="KHM Voice Logo">
-    <h1>KHM VOICE</h1>
-  </div>
+<!-- HEADER -->
+<header class="header">
+  <h1>KHM TV Journal</h1>
 </header>
 
+<!-- MAIN CONTENT -->
 <div class="container">
 
-  <div class="section">
-    <h2>Mission</h2>
-    <p>
-      <strong>KHM Voice</strong> est une plateforme de narration vocale et de diffusion d’informations
-      destinée à la communauté Khmer et au public international.
-      Elle produit des contenus fiables en <strong>khmer, anglais et français</strong>,
-      dans un esprit éducatif, culturel et informatif.
-    </p>
+  <p style="font-size:18px; line-height:1.6; text-align:center;">
+    Information, culture et analyse pour la communauté khmère
+    et le public international.
+  </p>
+
+  <!-- VIDEO -->
+  <div class="video-wrapper">
+    <div class="video-frame">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/-EnKpDKxe7w?rel=0"
+        title="KHM TV Journal"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
   </div>
 
-  <div class="section">
-    <h2>KHM TV Journal – Podcast</h2>
-    <p>
-      <strong>KHM TV Journal</strong> est un programme d’information et d’analyse diffusé sous forme
-      de podcasts et de vidéos courtes.
-    </p>
-
-<!-- KHM TV Journal - Video Podcast -->
-<section style="max-width:1000px;margin:40px auto;padding:0 16px;">
-  <h2 style="color:#2C6E49;">KHM TV Journal – Vidéo Podcast</h2>
-
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/-EnKpDKxe7w?rel=0"
-    title="KHM TV Journal"
-    style="width:100%;aspect-ratio:16/9;border:0;border-radius:12px;"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
-</section>
-
-    <ul>
-      <li>Actualités sociales, politiques et économiques</li>
-      <li>Analyse pédagogique et structurée</li>
-      <li>Voix synthétique Khmer (Coach_OM)</li>
-    </ul>
-
-    <p>
-      🎧 <em>Premiers épisodes en préparation.</em><br>
-      📺 Diffusion prévue sur plateformes sociales et site officiel.
-    </p>
-  </div>
+</div>
 
   <div class="section">
     <h2>Statut du service</h2>
