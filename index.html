@@ -124,6 +124,43 @@ select{
   body { overflow-y: auto; }   /* seulement très petit */
   .tv  { height: auto; }
 }
+/* Landscape / petite hauteur : gagner de la place en bas */
+@media (max-height: 520px) {
+
+  /* Header : un peu plus bas mais visible en entier */
+  .tv-header {
+    height: auto;
+    padding: 8px;
+  }
+
+  .tv-title {
+    font-size: 18px;
+    padding: 6px 10px;
+  }
+
+  /* Boutons plus compacts */
+  .tv-controls {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .btn {
+    font-size: 15px;        /* ↓ taille texte */
+    padding: 10px 8px;      /* ↓ hauteur bouton */
+    border-radius: 12px;
+  }
+
+  select {
+    font-size: 15px;
+    padding: 10px 8px;
+    border-radius: 12px;
+  }
+
+  /* Vidéo : s'adapte sans pousser le header */
+  .video-box {
+    max-height: calc(100vh - 80px - 84px - 20px);
+  }
+}
 
 </style>
 </head>
