@@ -202,32 +202,46 @@ select{
     margin: 0 auto;
   }
 }
+/* ===== FIX DEFINITIF : INFO-BAR NE GONFLE PLUS (LANDSCAPE) ===== */
 @media (orientation: landscape) {
+
   .info-bar{
-    padding: 6px 10px;     /* moins de padding */
+    height: 44px;              /* hauteur FIXE */
+    padding: 0 10px;           /* pas de padding vertical */
+    display: flex;
+    align-items: center;       /* centre vertical */
     gap: 8px;
-    min-height: 44px;      /* barre compacte */
+    flex-wrap: nowrap;         /* interdit le retour à la ligne */
+    overflow: hidden;          /* coupe si trop long */
   }
 
   .info-logo{
-    height: 26px;          /* logo plus petit */
+    height: 26px;
+    width: auto;
+    flex: 0 0 auto;
   }
 
+  /* IMPORTANT: min-width:0 empêche le texte de forcer la hauteur */
   .info-text{
-    line-height: 1.1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.05;
   }
 
   .info-name{
     font-size: 14px;
-    white-space: nowrap;   /* une seule ligne */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .info-sub{
     font-size: 12px;
-    white-space: nowrap;   /* empêche la 2e ligne */
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* … si trop long */
-    max-width: 60vw;
+    text-overflow: ellipsis;
   }
 }
 @media (orientation: landscape) {
