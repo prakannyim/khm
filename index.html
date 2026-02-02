@@ -165,6 +165,31 @@ select{
   .btn, select{ font-size: 14px; padding: 10px 8px; }
   .video-box{ width: min(52vw, 760px); }
 }
+/* ===== DEBUG LAYOUT (TEMPORAIRE) ===== */
+.tv{
+  outline: 3px solid #ff0000;     /* ROUGE : conteneur principal */
+}
+
+.tv-header{
+  outline: 3px solid #ff8800;     /* ORANGE : entête image */
+}
+
+.info-bar{
+  outline: 3px solid #ffff00;     /* JAUNE : info-bar */
+}
+
+.tv-main{
+  outline: 3px solid #00ffff;     /* CYAN : zone vidéo */
+}
+
+.tv-controls{
+  outline: 3px solid #00ff00;     /* VERT : zone boutons */
+}
+
+.video-box{
+  outline: 3px dashed #ffffff;   /* BLANC : cadre TV réel */
+}
+
 </style>
 </head>
 
@@ -174,7 +199,13 @@ select{
   <header class="tv-header">
     <div class="tv-title" id="pageTitle">KHM TV Journal</div>
  </header>
-
+<div class="info-bar">
+    <img src="assets/logo-khmvoice.png" alt="KHM Voice" class="info-logo">
+    <div class="info-text">
+      <div class="info-name">KHM Voice</div>
+      <div class="info-sub">Information — filled by ChatGPT</div>
+    </div>
+  </div>
   <main class="tv-main">
     <div class="video-box">
       <iframe id="ytFrame"
