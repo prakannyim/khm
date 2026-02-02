@@ -200,12 +200,12 @@ select{
   /* 1) Header image: compact */
   .tv-header{
     min-height: 140px;   /* ajuste: 120–160 */
-    padding: 10px;
+    padding: 5px;
   }
 
   /* 2) Info bar: fixed height */
   .info-bar{
-    height: 100px;
+    height: 44px;
     padding: 0 10px;
     display:flex;
     align-items:center;
@@ -236,7 +236,7 @@ select{
   .video-box{
     width: min(55vw, 780px);  /* ← réduit encore */
     aspect-ratio: 16 / 9;
-    max-height: calc(100vh - 140px - 44px - 92px - 24px);
+    max-height: calc(100vh - 140px - 44px - 24px);
   }
 }
 
@@ -247,11 +247,13 @@ body { overflow: hidden; }
 </style>
 </head>
 
+
+
 <body>
 <div class="tv">
   <header class="tv-header">
     <div class="tv-title" id="pageTitle">KHM TV Journal</div>
-  </header>
+ </header>
 <div class="info-bar">
   <img src="assets/logo-khmvoice.png" alt="KHM Voice" class="info-logo">
   <div class="info-text">
@@ -277,7 +279,6 @@ body { overflow: hidden; }
       <option value="en">English</option>
       <option value="kh">ខ្មែរ</option>
     </select>
-
     <!-- Archives -->
     <a class="btn" id="journalLink" href="journal.html?lang=fr">📚 Archives</a>
 
@@ -285,6 +286,10 @@ body { overflow: hidden; }
     <button class="btn" id="installBtn" type="button">⬇️ Installer</button>
   </footer>
 </div>
+
+
+
+
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 </script>
