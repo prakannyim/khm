@@ -188,5 +188,4 @@ $("langSel").addEventListener("change", () => {
 // restore language
 const savedLang = localStorage.getItem(LANG_KEY);
 if (savedLang && $("langSel")) $("langSel").value = savedLang;
-body: JSON.stringify({ lang, prompt, question: q })
 status("Prêt.");
