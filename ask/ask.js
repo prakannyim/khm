@@ -7,7 +7,6 @@ const KEY = "khmvoice.ask.prompts.v1";
 
 // Phase 2: tu pourras changer API_BASE vers un domaine API (ex: https://api.khmvoice.org)
 // ou laisser "" si l’API est sur le même site.
-let API_BASE = ""; // "" => same-origin
 
 function loadStore() {
   try { return JSON.parse(localStorage.getItem(KEY) || "{}"); }
