@@ -194,18 +194,24 @@ select{
   }
 }
 
+
+
+
+
+
+
 /* ===== LANDSCAPE : TV à 2/3 de la largeur écran ===== */
 @media (orientation: landscape) {
 
   /* 1) Header image: compact */
   .tv-header{
-    min-height: 160px;   /* ajuste: 120–160 */
+    min-height: 150px;   /* ajuste: 120–160 */
     padding: 5px;
   }
 
   /* 2) Info bar: fixed height */
   .info-bar{
-    height: 44px;
+    height: 20px;
     padding: 0 10px;
     display:flex;
     align-items:center;
@@ -234,9 +240,9 @@ select{
 
   /* 4) TV width: 2/3 -> smaller if needed */
   .video-box{
-    width: min(55vw, 780px);  /* ← réduit encore */
+    width: min(55vw, 800px);  /* ← réduit encore */
     aspect-ratio: 16 / 9;
-    max-height: calc(100vh - 160px - 44px - 20px);
+    max-height: calc(100vh - 150px - 20px - 20px);
   }
 }
 
