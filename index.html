@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>KHM Voice – KHM TV Journal</title>
 <meta name="description" content="KHM Voice – Voix Khmer, journal TV, podcast et contenus éducatifs multilingues.">
 <link rel="manifest" href="manifest.webmanifest">
@@ -21,7 +21,11 @@ body{
 }
 
 .tv{
-  height: 100vh;
+  .tv{ height: 100dvh; }      /* iOS moderne */
+  @supports not (height: 100dvh){
+  .tv{ height: 100vh; }     /* fallback */
+}
+
   display: grid;
   grid-template-rows: auto auto 1fr auto; /* header, info-bar, video, controls */
 }
@@ -98,6 +102,7 @@ body{
   padding: 16px;
   background: rgba(255,255,255,.04);
   border-top: 1px solid rgba(255,255,255,.12);
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
 }
 
 .btn{
@@ -199,6 +204,7 @@ select{
   <header class="tv-header">
     <div class="tv-title" id="pageTitle">KHM TV Journal</div>
  </header>
+
 <div class="info-bar">
     <img src="assets/logo-khmvoice.png" alt="KHM Voice" class="info-logo">
     <div class="info-text">
@@ -206,6 +212,7 @@ select{
       <div class="info-sub">Information — filled by ChatGPT</div>
     </div>
   </div>
+
   <main class="tv-main">
     <div class="video-box">
       <iframe id="ytFrame"
