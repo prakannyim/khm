@@ -1,7 +1,6 @@
 let API_BASE = "https://api.khmvoice.org";
 const LANG_KEY = "khmvoice.ask.lang.v1";
 
-body: JSON.stringify({ lang, prompt, question: q })
 
 const KEY = "khmvoice.ask.prompts.v1";
 
@@ -191,5 +190,5 @@ $("langSel").addEventListener("change", () => {
 // restore language
 const savedLang = localStorage.getItem(LANG_KEY);
 if (savedLang && $("langSel")) $("langSel").value = savedLang;
-
+body: JSON.stringify({ lang, prompt, question: q })
 status("Prêt.");
