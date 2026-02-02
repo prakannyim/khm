@@ -10,19 +10,26 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <style>
+/* Base */
 html, body { height: 100%; }
-body { margin:0; overflow:hidden; background:#0f1a16; color:#fff; font-family: Arial, sans-serif; }
+body{
+  margin: 0;
+  overflow: hidden;               /* page TV sans scroll */
+  background: #0f1a16;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
 
 .tv{
-  height:100vh;
-  display:grid;
+  height: 100vh;
+  display: grid;
   grid-template-rows: auto auto 1fr auto; /* header, info-bar, video, controls */
 }
 
 /* Header image */
-.tv-header {
-  padding: 8px 12px;
-  min-height: 64px;
+.tv-header{
+  padding: 12px;
+  min-height: 200px; /* Portrait: grand bandeau */
   background:
     linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
     url("assets/khmvoice_img.png") center/cover no-repeat;
@@ -30,35 +37,62 @@ body { margin:0; overflow:hidden; background:#0f1a16; color:#fff; font-family: A
   align-items: flex-end;
   justify-content: center;
 }
-.tv-title {
+
+.tv-title{
   background: rgba(0,0,0,.45);
   padding: 10px 18px;
   border-radius: 10px;
   font-size: 28px;
   letter-spacing: 1px;
   white-space: nowrap;
+  max-width: 92vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Info bar */
+.info-bar{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+.info-logo{ height: 34px; width: auto; flex: 0 0 auto; }
+.info-text{ min-width: 0; line-height: 1.05; }
+.info-name{ font-weight: bold; letter-spacing: .6px; }
+.info-sub{
+  font-size: 13px;
+  opacity: .85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Video area */
-.tv-main {
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.tv-main{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 12px;
 }
+
 .video-box{
-  width: min(980px, 96vw);
+  width: min(980px, 96vw);     /* Portrait: grand */
   aspect-ratio: 16 / 9;
   border-radius: 16px;
-  overflow:hidden;
+  overflow: hidden;
   box-shadow: 0 12px 36px rgba(0,0,0,.35);
-  background:#000;
+  background: #000;
 }
-.video-box iframe{ width:100%; height:100%; border:0; }
 
-/* Controls (big buttons) */
+.video-box iframe{ width: 100%; height: 100%; border: 0; }
+
+/* Controls */
 .tv-controls{
-  display:grid;
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 12px;
   padding: 16px;
@@ -72,15 +106,15 @@ body { margin:0; overflow:hidden; background:#0f1a16; color:#fff; font-family: A
   border-radius: 16px;
   border: 1px solid rgba(255,255,255,.16);
   background: rgba(255,255,255,.06);
-  color:#fff;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 
-.btn:active { transform: scale(0.99); }
+.btn:active{ transform: scale(0.99); }
 
 select{
   font-size: 20px;
@@ -88,171 +122,51 @@ select{
   border-radius: 16px;
   border: 1px solid rgba(255,255,255,.16);
   background: rgba(0,0,0,.25);
-  color:#fff;
+  color: #fff;
   width: 100%;
 }
 
-/* Landscape low height: compact a bit but still no scroll */
-@media (max-height: 520px){
-  .tv { grid-template-rows: 110px 1fr 120px; }
-  .tv-title { font-size: 22px; }
-  .btn { font-size: 18px; padding: 14px 12px; }
-  select { font-size: 18px; padding: 14px 12px; }
-}
-/* Landscape / petite hauteur : compacter pour ne rien couper */
-@media (max-height: 520px) {
-  .tv {
-    grid-template-rows: 90px 1fr 96px; /* header / video / controls */
-  }
-
-  .tv-header { padding: 10px; }
-  .tv-title  { font-size: 20px; padding: 6px 12px; }
-
-  .tv-controls { padding: 10px; gap: 10px; }
-  .btn { font-size: 16px; padding: 12px 10px; border-radius: 14px; }
-  select { font-size: 16px; padding: 12px 10px; border-radius: 14px; }
-
-  .video-box{
-    width: min(860px, 96vw);
-    /* la hauteur réelle doit tenir dans l'écran */
-    max-height: calc(100vh - 90px - 96px - 24px);
-  }
-}
-@media (max-height: 680px) and (min-height: 521px) {
-  .tv { grid-template-rows: 110px 1fr 110px; }
-  .btn { font-size: 18px; padding: 14px 12px; }
-  select { font-size: 18px; padding: 14px 12px; }
-  .video-box{ max-height: calc(100vh - 110px - 110px - 24px); }
-}
-@media (max-height: 420px) {
-  body { overflow-y: auto; }   /* seulement très petit */
-  .tv  { height: auto; }
-}
-/* Landscape / petite hauteur : gagner de la place en bas */
-@media (max-height: 520px) {
-
-  /* Header : un peu plus bas mais visible en entier */
-  .tv-header {
-    height: auto;
-    padding: 8px;
-  }
-
-  .tv-title {
-    font-size: 18px;
-    padding: 6px 10px;
-  }
-
-  /* Boutons plus compacts */
-  .tv-controls {
-    padding: 8px;
-    gap: 8px;
-  }
-
-  .btn {
-    font-size: 15px;        /* ↓ taille texte */
-    padding: 10px 8px;      /* ↓ hauteur bouton */
-    border-radius: 12px;
-  }
-
-  select {
-    font-size: 15px;
-    padding: 10px 8px;
-    border-radius: 12px;
-  }
-
-  /* Vidéo : s'adapte sans pousser le header */
-  .video-box {
-    max-height: calc(100vh - 80px - 84px - 20px);
-  }
-}
-/* --- Info bar sous l'entête --- */
-.info-bar{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:10px 14px;
-  background: rgba(255,255,255,.06);
-  border-bottom: 1px solid rgba(255,255,255,.12);
-}
-.info-logo{ height:34px; width:auto; }
-.info-name{ font-weight:bold; letter-spacing:.6px; }
-.info-sub{ font-size:13px; opacity:.85; }
-
-/* --- Portrait: entête réduit d’1/3 --- */
-@media (orientation: portrait) {
-  .tv { grid-template-rows: auto auto 1fr auto; }
-
-  /* Avant: min-height ~300px → maintenant ~200px */
-  .tv-header{
-    min-height: 200px;   /* ≈ -33% */
-    padding: 14px;
-  }
-
-  .tv-title{
-    font-size: 26px;     /* légèrement plus compact */
-    padding: 8px 14px;
-  }
-}
-
-
-
-
-
-
-
-/* ===== LANDSCAPE : TV à 2/3 de la largeur écran ===== */
+/* ===== LANDSCAPE (tablette/laptop) ===== */
 @media (orientation: landscape) {
+  /* Header plus compact */
+  .tv-header{ min-height: 150px; padding: 8px; }
+  .tv-title{ font-size: 22px; padding: 8px 14px; }
 
-  /* 1) Header image: compact */
-  .tv-header{
-    min-height: 150px;   /* ajuste: 120–160 */
-    padding: 5px;
-  }
-
-  /* 2) Info bar: fixed height */
+  /* Info-bar: hauteur fixe (anti-gonflement) */
   .info-bar{
-    height: 20px;
-    padding: 0 10px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    flex-wrap:nowrap;
-    overflow:hidden;
+    height: 44px;
+    padding: 0 12px;
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow: hidden;
   }
-  .info-logo{ height:20px; width:auto; flex:0 0 auto; }
-  .info-text{ min-width:0; line-height:1.05; }
-  .info-name,.info-sub{
-    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  }
-  .info-name{ font-size:14px; }
-  .info-sub{ font-size:12px; }
+  .info-logo{ height: 26px; }
+  .info-name{ font-size: 14px; }
+  .info-sub{ font-size: 12px; max-width: 60vw; }
 
-  /* 3) Controls: slightly tighter to keep visible */
-  .tv-controls{
-    padding: 8px;
-    gap: 8px;
-  }
-  .btn, select{
-    font-size: 15px;
-    padding: 10px 8px;
-    border-radius: 12px;
-  }
-
-  /* 4) TV width: 2/3 -> smaller if needed */
+  /* TV centrée et plus étroite (≈ 2/3 → ici 55vw) */
   .video-box{
-    width: min(55vw, 800px);  /* ← réduit encore */
-    aspect-ratio: 16 / 9;
-    max-height: calc(100vh - 150px - 20px - 20px);
+    width: min(55vw, 800px);
+    max-height: calc(100vh - 150px - 44px - 96px - 24px); /* header - infobar - controls - marges */
+  }
+
+  /* Boutons un peu plus compacts */
+  .tv-controls{ padding: 10px; gap: 10px; }
+  .btn, select{
+    font-size: 16px;
+    padding: 12px 10px;
+    border-radius: 14px;
   }
 }
 
-/* Sécurité: jamais de scroll sur la page TV */
-html, body { height: 100%; }
-body { overflow: hidden; }
-
+/* Cas extrême: très faible hauteur → mini-compact (évite coupure) */
+@media (max-height: 420px) {
+  .tv-header{ min-height: 120px; }
+  .btn, select{ font-size: 14px; padding: 10px 8px; }
+  .video-box{ width: min(52vw, 760px); }
+}
 </style>
 </head>
-
 
 
 <body>
@@ -260,9 +174,6 @@ body { overflow: hidden; }
   <header class="tv-header">
     <div class="tv-title" id="pageTitle">KHM TV Journal</div>
  </header>
-
-
-
 
   <main class="tv-main">
     <div class="video-box">
