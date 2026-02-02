@@ -14,17 +14,21 @@ html, body { height: 100%; }
 body { margin:0; overflow:hidden; background:#0f1a16; color:#fff; font-family: Arial, sans-serif; }
 
 .tv {
-  height: 100%;
+  height: 100vh;
   display: grid;
-  grid-template-rows: 140px 1fr 140px; /* header / video / controls */
+  grid-template-rows: auto 1fr auto; /* header libre */
 }
 
 /* Header image */
 .tv-header {
-  background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
-              url("assets/khmvoice_img.png") center/cover no-repeat;
-  display:flex; align-items:flex-end; justify-content:center;
-  padding: 18px;
+  padding: 8px 12px;
+  min-height: 64px;
+  background:
+    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
+    url("assets/khmvoice_img.png") center/cover no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 .tv-title {
   background: rgba(0,0,0,.45);
@@ -53,27 +57,15 @@ body { margin:0; overflow:hidden; background:#0f1a16; color:#fff; font-family: A
 .video-box iframe{ width:100%; height:100%; border:0; }
 
 /* Controls (big buttons) */
-.tv-controls{
-  display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  padding: 16px;
-  background: rgba(255,255,255,.04);
-  border-top: 1px solid rgba(255,255,255,.12);
+.tv-controls {
+  padding: 8px;
+  gap: 8px;
 }
 
-.btn{
-  font-size: 22px;
-  padding: 18px 16px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.16);
-  background: rgba(255,255,255,.06);
-  color:#fff;
-  text-decoration:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap: 10px;
+.btn, select {
+  font-size: 15px;
+  padding: 10px 8px;
+  border-radius: 12px;
 }
 
 .btn:active { transform: scale(0.99); }
