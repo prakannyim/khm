@@ -196,25 +196,43 @@ select{
 
 /* ===== LANDSCAPE : TV à 2/3 de la largeur écran ===== */
 @media (orientation: landscape) {
-
-  /* Zone vidéo centrée */
-  .tv-main{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   .video-box{
-    width: 66vw;              /* ← 2/3 de la largeur écran */
-    max-width: 900px;         /* limite TV sur grands écrans */
+    width: min(60vw, 820px);  /* plus petit que 66vw */
     aspect-ratio: 16 / 9;
     margin: 0 auto;
   }
-
-  /* Sécurité hauteur : ne pousse jamais les boutons */
-  .video-box{
-    max-height: calc(100vh - 156px - 60px - 96px);
+}
+@media (orientation: landscape) {
+  .info-bar{
+    padding: 6px 10px;     /* moins de padding */
+    gap: 8px;
+    min-height: 44px;      /* barre compacte */
   }
+
+  .info-logo{
+    height: 26px;          /* logo plus petit */
+  }
+
+  .info-text{
+    line-height: 1.1;
+  }
+
+  .info-name{
+    font-size: 14px;
+    white-space: nowrap;   /* une seule ligne */
+  }
+
+  .info-sub{
+    font-size: 12px;
+    white-space: nowrap;   /* empêche la 2e ligne */
+    overflow: hidden;
+    text-overflow: ellipsis; /* … si trop long */
+    max-width: 60vw;
+  }
+}
+@media (orientation: landscape) {
+  .tv-header{ min-height: 140px; }
+  .tv-controls{ padding: 8px; }
 }
 
   /* 2) ZONE VIDÉO −30% */
