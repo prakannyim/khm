@@ -13,10 +13,10 @@
 html, body { height: 100%; }
 body { margin:0; overflow:hidden; background:#0f1a16; color:#fff; font-family: Arial, sans-serif; }
 
-.tv {
-  height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto; /* header libre */
+.tv{
+  height:100vh;
+  display:grid;
+  grid-template-rows: auto auto 1fr auto; /* header, info-bar, video, controls */
 }
 
 /* Header image */
@@ -165,6 +165,41 @@ select{
     max-height: calc(100vh - 80px - 84px - 20px);
   }
 }
+/* --- Info bar sous l'entête --- */
+.info-bar{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 14px;
+  background: rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.info-logo{ height:34px; width:auto; }
+.info-name{ font-weight:bold; letter-spacing:.6px; }
+.info-sub{ font-size:13px; opacity:.85; }
+
+/* --- Portrait: entête plus grand --- */
+@media (orientation: portrait) {
+  .tv { grid-template-rows: auto auto 1fr auto; }
+  .tv-header{ min-height: 300px; padding: 18px; }  /* “double” */
+  .tv-title{ font-size: 30px; padding: 10px 16px; }
+}
+
+/* --- Landscape: entête compact pour éviter coupures --- */
+@media (orientation: landscape) {
+  .tv { grid-template-rows: auto auto 1fr auto; }
+  .tv-header{ min-height: 130px; padding: 10px; }
+  .tv-title{ font-size: 20px; padding: 6px 12px; }
+
+  /* Boutons un peu plus petits en landscape */
+  .tv-controls{ padding: 8px; gap: 8px; }
+  .btn{ font-size: 15px; padding: 10px 8px; border-radius: 12px; }
+  select{ font-size: 15px; padding: 10px 8px; border-radius: 12px; }
+}
+
+/* Sécurité: jamais de scroll sur la page TV */
+html, body { height: 100%; }
+body { overflow: hidden; }
 
 </style>
 </head>
@@ -174,6 +209,13 @@ select{
   <header class="tv-header">
     <div class="tv-title" id="pageTitle">KHM TV Journal</div>
   </header>
+<div class="info-bar">
+  <img src="assets/logo-khmvoice.png" alt="KHM Voice" class="info-logo">
+  <div class="info-text">
+    <div class="info-name">KHM Voice</div>
+    <div class="info-sub">Information — filled by ChatGPT</div>
+  </div>
+</div>
 
   <main class="tv-main">
     <div class="video-box">
