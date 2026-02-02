@@ -196,85 +196,47 @@ select{
 
 /* ===== LANDSCAPE : TV à 2/3 de la largeur écran ===== */
 @media (orientation: landscape) {
-  .video-box{
-    width: min(60vw, 820px);  /* plus petit que 66vw */
-    aspect-ratio: 16 / 9;
-    margin: 0 auto;
-  }
-}
-/* ===== FIX DEFINITIF : INFO-BAR NE GONFLE PLUS (LANDSCAPE) ===== */
-@media (orientation: landscape) {
 
-  .info-bar{
-    height: 44px;              /* hauteur FIXE */
-    padding: 0 10px;           /* pas de padding vertical */
-    display: flex;
-    align-items: center;       /* centre vertical */
-    gap: 8px;
-    flex-wrap: nowrap;         /* interdit le retour à la ligne */
-    overflow: hidden;          /* coupe si trop long */
-  }
-
-  .info-logo{
-    height: 26px;
-    width: auto;
-    flex: 0 0 auto;
-  }
-
-  /* IMPORTANT: min-width:0 empêche le texte de forcer la hauteur */
-  .info-text{
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    line-height: 1.05;
-  }
-
-  .info-name{
-    font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .info-sub{
-    font-size: 12px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-@media (orientation: landscape) {
-  .tv-header{ min-height: 140px; }
-  .tv-controls{ padding: 8px; }
-}
-
-  /* 2) ZONE VIDÉO −30% */
-  .video-box{
-    width: min(900px, 94vw);
-    aspect-ratio: 16 / 9;
-
-    /* on limite volontairement la hauteur */
-    max-height: calc((100vh - 156px - 60px - 96px) * 0.70);
-    /*        écran - header - info-bar - boutons   → -30% */
-  }
-
-  /* 3) BOUTONS : priorité visibilité */
-  .tv-controls{
+  /* 1) Header image: compact */
+  .tv-header{
+    min-height: 140px;   /* ajuste: 120–160 */
     padding: 10px;
-    gap: 10px;
   }
 
-  .btn{
-    font-size: 16px;
-    padding: 12px 10px;
-    border-radius: 14px;
+  /* 2) Info bar: fixed height */
+  .info-bar{
+    height: 44px;
+    padding: 0 10px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:nowrap;
+    overflow:hidden;
+  }
+  .info-logo{ height:26px; width:auto; flex:0 0 auto; }
+  .info-text{ min-width:0; line-height:1.05; }
+  .info-name,.info-sub{
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .info-name{ font-size:14px; }
+  .info-sub{ font-size:12px; }
+
+  /* 3) Controls: slightly tighter to keep visible */
+  .tv-controls{
+    padding: 8px;
+    gap: 8px;
+  }
+  .btn, select{
+    font-size: 15px;
+    padding: 10px 8px;
+    border-radius: 12px;
   }
 
-  select{
-    font-size: 16px;
-    padding: 12px 10px;
-    border-radius: 14px;
+  /* 4) TV width: 2/3 -> smaller if needed */
+  .video-box{
+    width: min(55vw, 780px);  /* ← réduit encore */
+    aspect-ratio: 16 / 9;
+    max-height: calc(100vh - 140px - 44px - 92px - 24px);
   }
 }
 
