@@ -194,24 +194,28 @@ select{
   }
 }
 
-/* ===== LANDSCAPE : ajustement TV senior ===== */
+/* ===== LANDSCAPE : TV à 2/3 de la largeur écran ===== */
 @media (orientation: landscape) {
 
-  /* Grille : header + info + video + controls */
-  .tv{
-    grid-template-rows: auto auto 1fr auto;
+  /* Zone vidéo centrée */
+  .tv-main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* 1) ENTÊTE +20% */
-  .tv-header{
-    min-height: 156px;     /* ex: 130px → +20% ≈ 156px */
-    padding: 12px;
+  .video-box{
+    width: 66vw;              /* ← 2/3 de la largeur écran */
+    max-width: 900px;         /* limite TV sur grands écrans */
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
   }
 
-  .tv-title{
-    font-size: 22px;
-    padding: 8px 14px;
+  /* Sécurité hauteur : ne pousse jamais les boutons */
+  .video-box{
+    max-height: calc(100vh - 156px - 60px - 96px);
   }
+}
 
   /* 2) ZONE VIDÉO −30% */
   .video-box{
