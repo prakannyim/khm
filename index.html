@@ -194,16 +194,52 @@ select{
   }
 }
 
-/* --- Landscape: entête compact pour éviter coupures --- */
+/* ===== LANDSCAPE : ajustement TV senior ===== */
 @media (orientation: landscape) {
-  .tv { grid-template-rows: auto auto 1fr auto; }
-  .tv-header{ min-height: 130px; padding: 10px; }
-  .tv-title{ font-size: 20px; padding: 6px 12px; }
 
-  /* Boutons un peu plus petits en landscape */
-  .tv-controls{ padding: 8px; gap: 8px; }
-  .btn{ font-size: 15px; padding: 10px 8px; border-radius: 12px; }
-  select{ font-size: 15px; padding: 10px 8px; border-radius: 12px; }
+  /* Grille : header + info + video + controls */
+  .tv{
+    grid-template-rows: auto auto 1fr auto;
+  }
+
+  /* 1) ENTÊTE +20% */
+  .tv-header{
+    min-height: 156px;     /* ex: 130px → +20% ≈ 156px */
+    padding: 12px;
+  }
+
+  .tv-title{
+    font-size: 22px;
+    padding: 8px 14px;
+  }
+
+  /* 2) ZONE VIDÉO −30% */
+  .video-box{
+    width: min(900px, 94vw);
+    aspect-ratio: 16 / 9;
+
+    /* on limite volontairement la hauteur */
+    max-height: calc((100vh - 156px - 60px - 96px) * 0.70);
+    /*        écran - header - info-bar - boutons   → -30% */
+  }
+
+  /* 3) BOUTONS : priorité visibilité */
+  .tv-controls{
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .btn{
+    font-size: 16px;
+    padding: 12px 10px;
+    border-radius: 14px;
+  }
+
+  select{
+    font-size: 16px;
+    padding: 12px 10px;
+    border-radius: 14px;
+  }
 }
 
 /* Sécurité: jamais de scroll sur la page TV */
