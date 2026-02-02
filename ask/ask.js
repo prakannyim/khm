@@ -3,8 +3,6 @@ const LANG_KEY = "khmvoice.ask.lang.v1";
 
 body: JSON.stringify({ lang, prompt, question: q })
 
-const $ = (id) => document.getElementById(id);
-
 const KEY = "khmvoice.ask.prompts.v1";
 
 // Phase 2: tu pourras changer API_BASE vers un domaine API (ex: https://api.khmvoice.org)
@@ -182,6 +180,9 @@ $("answerText").value =
 };
 
 // init
+
+const $ = (id) => document.getElementById(id);
+
 refreshList();
 
 $("langSel").addEventListener("change", () => {
