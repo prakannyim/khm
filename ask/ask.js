@@ -179,8 +179,6 @@ $("answerText").value =
 
 // init
 
-const $ = (id) => document.getElementById(id);
-
 refreshList();
 
 $("langSel").addEventListener("change", () => {
