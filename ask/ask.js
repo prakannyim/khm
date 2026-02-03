@@ -4,9 +4,43 @@ let API_BASE = "https://ask-api-r25z.onrender.com";
 
 const LANG_KEY = "khmvoice.ask.lang.v1";
 const KEY = "khmvoice.ask.prompts.v1";
+const lang = document.getElementById("langSel").value;
+const prompt = document.getElementById("promptInput").value.trim();
+const question = document.getElementById("questionInput").value.trim();
+
 
 // Phase 2: tu pourras changer API_BASE vers un domaine API (ex: https://api.khmvoice.org)
 // ou laisser "" si l’API est sur le même site.
+
+const answerBox = document.getElementById("answerBox");
+const loading = document.getElementById("loading");
+
+loading.hidden = false;
+answerBox.innerText = "";
+
+fetch(API_BASE + "/api/chat", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    lang,
+    prompt,
+    question
+  })
+})
+.then(r => r.json())
+.then(data => {
+  loading.hidden = true;
+  answerBox.innerText = data.answer || "Aucune réponse.";
+  answerBox.scrollIntoView({ behavior: "smooth" });
+})
+.catch(err => {
+  loading.hidden = true;
+  answerBox.innerText = "Erreur de connexion.";
+});
+
+
+
+
 
 function loadStore() {
   try { return JSON.parse(localStorage.getItem(KEY) || "{}"); }
