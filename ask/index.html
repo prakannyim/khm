@@ -9,22 +9,18 @@
 </head>
 <body>
 
-  <body>
-
   <main id="askApp">
-
     <div id="layout">
 
-      <!-- LEFT: Prompts menu -->
+      <!-- LEFT: Prompts -->
       <aside id="promptMenu">
-
         <div>
           <h3>Prompts</h3>
         </div>
 
         <div>
           <input id="promptTitle" type="text" placeholder="Titre du prompt" />
-          <textarea id="promptText" rows="6" placeholder="Ton prompt / contexte..."></textarea>
+          <textarea id="promptText" rows="7" placeholder="Ton prompt / contexte..."></textarea>
         </div>
 
         <div>
@@ -34,16 +30,14 @@
         </div>
 
         <div>
-          <select id="promptList" size="10" style="width:100%;">
-            <!-- items -->
+          <select id="promptList" size="12" style="width:100%;">
+            <!-- rempli par JS -->
           </select>
         </div>
-
       </aside>
 
-      <!-- RIGHT: Ask UI -->
+      <!-- RIGHT: Ask -->
       <section id="askPane">
-
         <header>
           <h2>Ask ChatGPT</h2>
 
@@ -61,15 +55,13 @@
 
         <section>
           <div id="loading" hidden>⏳ Réflexion en cours…</div>
-          <div id="answerBox"><!-- Réponse ici --></div>
+          <div id="answerBox"></div>
         </section>
-
       </section>
 
     </div>
-
   </main>
-
 </body>
+
 
 </html>
