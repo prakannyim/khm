@@ -70,7 +70,7 @@ function applyPromptById(id) {
   $("promptText").value = p?.text || "";
 
   setActivePromptId(p?.id || "");
-  renderPrompts($("promptSearch").value || "");
+  // renderPrompts($("promptSearch").value || "");
 }
 
 function newPrompt() {
