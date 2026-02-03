@@ -69,3 +69,36 @@
   min-height: 180px;
   box-sizing: border-box;
 }
+@media (max-width: 900px){
+  #app{
+    flex-direction: column;
+  }
+
+  /* Sidebar toujours visible, pas de max-height */
+  #sidebar{
+    flex: 0 0 auto;
+    width: 100%;
+    max-height: none;
+    overflow: visible;  /* visible en entier */
+  }
+
+  /* Main garde le reste de l'écran et scroll interne */
+  #main{
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* Les panes prennent la hauteur restante */
+  #panes{
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* Les textareas scrollent à l'intérieur */
+  #promptText, #answerText{
+    overflow: auto;
+  }
+}
+
