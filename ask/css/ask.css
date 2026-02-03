@@ -102,3 +102,10 @@
   }
 }
 
+@media (max-width: 900px) and (orientation: portrait){
+  #promptTitle{
+    width: 80%;        /* -20% */
+    max-width: 80%;
+  }
+}
+
