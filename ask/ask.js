@@ -64,6 +64,7 @@ $("btnLoad").onclick = () => {
   if (!store[name]) return status("Rien à charger.");
   $("promptTitle").value = name;
   $("promptText").value = store[name];
+  $("questionText").value=store[name];
   status(`Chargé: ${name}`);
 };
 
