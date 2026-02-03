@@ -1,345 +1,77 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>KHM Voice – KHM TV Journal</title>
-<meta name="description" content="KHM Voice – Voix Khmer, journal TV, podcast et contenus éducatifs multilingues.">
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#2C6E49">
-<meta name="mobile-web-app-capable" content="yes">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ask ChatGPT</title>
 
-<style>
-/* Base */
-html, body { height: 100%; }
-body{
-  margin: 0;
-  overflow: hidden;               /* page TV sans scroll */
-  background: #0f1a16;
-  color: #fff;
-  font-family: Arial, sans-serif;
-}
-
-.tv{
-  .tv{ height: 100dvh; }      /* iOS moderne */
-  @supports not (height: 100dvh){
-  .tv{ height: 100vh; }     /* fallback */
-}
-
-  display: grid;
-  grid-template-rows: auto auto 1fr auto; /* header, info-bar, video, controls */
-}
-
-/* Header image */
-.tv-header{
-  padding: 12px;
-  min-height: 200px; /* Portrait: grand bandeau */
-  background:
-    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
-    url("assets/khmvoice_img.png") center/cover no-repeat;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.tv-title{
-  background: rgba(0,0,0,.45);
-  padding: 10px 18px;
-  border-radius: 10px;
-  font-size: 28px;
-  letter-spacing: 1px;
-  white-space: nowrap;
-  max-width: 92vw;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Info bar */
-.info-bar{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  background: rgba(255,255,255,.06);
-  border-bottom: 1px solid rgba(255,255,255,.12);
-}
-
-.info-logo{ height: 34px; width: auto; flex: 0 0 auto; }
-.info-text{ min-width: 0; line-height: 1.05; }
-.info-name{ font-weight: bold; letter-spacing: .6px; }
-.info-sub{
-  font-size: 13px;
-  opacity: .85;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Video area */
-.tv-main{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-}
-
-.video-box{
-  width: min(980px, 96vw);     /* Portrait: grand */
-  aspect-ratio: 16 / 9;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 12px 36px rgba(0,0,0,.35);
-  background: #000;
-}
-
-.video-box iframe{ width: 100%; height: 100%; border: 0; }
-
-/* Controls */
-.tv-controls{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  padding: 16px;
-  background: rgba(255,255,255,.04);
-  border-top: 1px solid rgba(255,255,255,.12);
-  padding-bottom: calc(16px + env(safe-area-inset-bottom));
-}
-
-.btn{
-  font-size: 22px;
-  padding: 18px 16px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.16);
-  background: rgba(255,255,255,.06);
-  color: #fff;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.btn:active{ transform: scale(0.99); }
-
-select{
-  font-size: 20px;
-  padding: 16px 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.16);
-  background: rgba(0,0,0,.25);
-  color: #fff;
-  width: 100%;
-}
-
-/* ===== LANDSCAPE (tablette/laptop) ===== */
-@media (orientation: landscape) {
-  /* Header plus compact */
-  .tv-header{ min-height: 150px; padding: 8px; }
-  .tv-title{ font-size: 22px; padding: 8px 14px; }
-
-  /* Info-bar: hauteur fixe (anti-gonflement) */
-  .info-bar{
-    height: 44px;
-    padding: 0 12px;
-    gap: 10px;
-    flex-wrap: nowrap;
-    overflow: hidden;
-  }
-  .info-logo{ height: 26px; }
-  .info-name{ font-size: 14px; }
-  .info-sub{ font-size: 12px; max-width: 60vw; }
-
-  /* TV centrée et plus étroite (≈ 2/3 → ici 55vw) */
-  .video-box{
-    width: min(55vw, 800px);
-    max-height: calc(100vh - 150px - 44px - 96px - 24px); /* header - infobar - controls - marges */
-  }
-
-  /* Boutons un peu plus compacts */
-  .tv-controls{ padding: 10px; gap: 10px; }
-  .btn, select{
-    font-size: 16px;
-    padding: 12px 10px;
-    border-radius: 14px;
-  }
-}
-
-/* Cas extrême: très faible hauteur → mini-compact (évite coupure) */
-@media (max-height: 420px) {
-  .tv-header{ min-height: 120px; }
-  .btn, select{ font-size: 14px; padding: 10px 8px; }
-  .video-box{ width: min(52vw, 760px); }
-}
-/* ===== DEBUG LAYOUT (TEMPORAIRE) ===== */
-.tv{
-  outline: 3px solid #ff0000;     /* ROUGE : conteneur principal */
-}
-
-.tv-header{
-  outline: 3px solid #ff8800;     /* ORANGE : entête image */
-}
-
-.info-bar{
-  outline: 3px solid #ffff00;     /* JAUNE : info-bar */
-}
-
-.tv-main{
-  outline: 3px solid #00ffff;     /* CYAN : zone vidéo */
-}
-
-.tv-controls{
-  outline: 3px solid #00ff00;     /* VERT : zone boutons */
-}
-
-.video-box{
-  outline: 3px dashed #ffffff;   /* BLANC : cadre TV réel */
-}
-
-</style>
+  <!-- Mets ton CSS si tu en as un -->
+  <link rel="stylesheet" href="/ask/ask.css" />
+  <script src="/ask/ask.js" defer></script>
 </head>
 
-
 <body>
-<div class="tv">
-  <header class="tv-header">
-    <div class="tv-title" id="pageTitle">KHM TV Journal</div>
- </header>
+  <div id="app">
 
-<div class="info-bar">
-    <img src="assets/logo-khmvoice.png" alt="KHM Voice" class="info-logo">
-    <div class="info-text">
-      <div class="info-name">KHM Voice</div>
-      <div class="info-sub">Information — filled by ChatGPT</div>
-    </div>
+    <!-- LEFT: Prompt Library -->
+    <aside id="sidebar">
+      <div class="side-head">
+        <h3>Prompts</h3>
+      </div>
+        <select id="langSel" aria-label="Langue">
+          <option value="fr">Français</option>
+          <option value="en">English</option>
+          <option value="kh">ខ្មែរ</option>
+        </select>
+        <select id="promptPick" aria-label="Nom du prompt">
+          <!-- rempli par JS -->
+        </select>
+
+      <div class="side-actions">
+      </div>
+    </aside>
+
+    <!-- RIGHT: Editor + Ask -->
+    <main id="main">
+
+      <!-- TOP BAR: one line -->
+      <header id="topbar">
+      </header>
+
+      <!-- BOTTOM: prompt + answer -->
+      <section id="panes">
+
+        <div class="pane">
+          <div class="pane-head">
+            <strong>Prompt (édition)</strong>
+            <span class="spacer"></span>
+            <input id="promptTitle" type="text" placeholder="Titre du prompt" />
+            <button id="btnNewPrompt" type="button">+ Nouveau</button>
+            <button id="btnSavePrompt" type="button">Sauver</button>
+            <button id="btnDeletePrompt" type="button">Supprimer</button>
+            <button id="sendBtn" type="button">Envoyer</button>
+
+          </div>
+
+          <textarea id="promptText" rows="10" placeholder="Écris/colle ton prompt ici…"></textarea>
+        </div>
+
+        <div class="pane">
+          <div class="pane-head">
+            <strong>Réponse</strong>
+            <span class="spacer"></span>
+            <div id="loading" hidden>⏳ Réflexion…</div>
+            <button id="btnCopyAnswer" type="button">Copier</button>
+            <button id="btnClearAnswer" type="button">Effacer</button>
+          </div>
+
+          <textarea id="answerText" rows="14" readonly placeholder="La réponse s’affiche ici…"></textarea>
+        </div>
+
+      </section>
+
+    </main>
+
   </div>
-
-  <main class="tv-main">
-    <div class="video-box">
-      <iframe id="ytFrame"
-        src=""
-        title="KHM TV Journal"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-    </div>
-  </main>
-
-  <footer class="tv-controls">
-    <!-- Langue -->
-    <select id="langSel" aria-label="Choisir la langue">
-      <option value="fr">Français</option>
-      <option value="en">English</option>
-      <option value="kh">ខ្មែរ</option>
-    </select>
-    <!-- Archives -->
-    <a class="btn" id="journalLink" href="journal.html?lang=fr">📚 Archives</a>
-
-    <!-- Plein écran / installer -->
-    <button class="btn" id="installBtn" type="button">⬇️ Installer</button>
-  </footer>
-</div>
-
-
-
-
-<script>
-document.getElementById("year").textContent = new Date().getFullYear();
-</script>
-<script>
-(function(){
-  // IDs YouTube (exemples)
-  const VIDEO_ID = {
-    fr: "3sDCmdSmtI4",
-    en: "3sDCmdSmtI4",
-    kh: "3sDCmdSmtI4"
-  };
-
-  const TITLES = {
-    fr: "KHM TV Journal",
-    en: "KHM TV Journal",
-    kh: "KHM TV Journal"
-  };
-
-  const sel = document.getElementById("langSel");
-  const frame = document.getElementById("ytFrame");
-  const journalLink = document.getElementById("journalLink");
-  const pageTitle = document.getElementById("pageTitle");
-
-  const params = new URLSearchParams(location.search);
-  const lang = params.get("lang") || localStorage.getItem("khm_lang") || "fr";
-  const safeLang = (lang === "fr" || lang === "en" || lang === "kh") ? lang : "fr";
-
-  function applyLang(v){
-    localStorage.setItem("khm_lang", v);
-    sel.value = v;
-    pageTitle.textContent = TITLES[v];
-    const id = VIDEO_ID[v];
-    frame.src = "https://www.youtube-nocookie.com/embed/" + id + "?rel=0";
-    journalLink.href = "journal.html?lang=" + v;
-  }
-
-  applyLang(safeLang);
-
-  sel.addEventListener("change", () => {
-    applyLang(sel.value);
-    // Met à jour l'URL sans recharger (propre)
-    const u = new URL(location.href);
-    u.searchParams.set("lang", sel.value);
-    history.replaceState({}, "", u.toString());
-  });
-
-  // Bouton "Installer" (Android Chrome)
-  let deferredPrompt = null;
-  const installBtn = document.getElementById("installBtn");
-  installBtn.style.display = "none";
-
-  window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    installBtn.style.display = "flex";
-  });
-
-  installBtn.addEventListener("click", async () => {
-    if (!deferredPrompt) {
-      alert("Sur Android: menu ⋮ → “Ajouter à l’écran d’accueil”.");
-      return;
-    }
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    deferredPrompt = null;
-    installBtn.style.display = "none";
-  });
-})();
-</script>
-<script>
-  const sel = document.getElementById("langSel");
-  const frame = document.getElementById("ytFrame");
-  const journalLink = document.getElementById("journalLink");
-
-  // 2) Déterminer la langue (URL > localStorage > défaut)
-  const params = new URLSearchParams(location.search);
-  const lang = params.get("lang") || localStorage.getItem("khm_lang") || "fr";
-  const safeLang = (lang === "fr" || lang === "en" || lang === "kh") ? lang : "fr";
-
-  sel.value = safeLang;
-  localStorage.setItem("khm_lang", safeLang);
-
-  // 3) Appliquer l'iframe + le lien Journal
-  const id = VIDEO_ID[safeLang];
-  frame.src = "https://www.youtube-nocookie.com/embed/" + id + "?rel=0";
-  journalLink.href = "journal.html?lang=" + safeLang;
-
-  // 4) Changement de langue
-  sel.addEventListener("change", () => {
-    const v = sel.value;
-    localStorage.setItem("khm_lang", v);
-    location.search = "?lang=" + v; // recharge la page avec la langue
-  });
-</script>
-<script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/service-worker.js");
-  }
-</script>
-
 </body>
 </html>
