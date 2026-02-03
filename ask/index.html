@@ -9,50 +9,67 @@
 </head>
 <body>
 
+  <body>
+
   <main id="askApp">
 
-    <!-- Header -->
-    <header>
-      <h2>Ask ChatGPT</h2>
+    <div id="layout">
 
-      <!-- Language selector -->
-      <select id="langSel">
-        <option value="fr">Français</option>
-        <option value="en">English</option>
-        <option value="kh">ខ្មែរ</option>
-      </select>
-    </header>
+      <!-- LEFT: Prompts menu -->
+      <aside id="promptMenu">
 
-    <!-- Prompt (optionnel / contexte) -->
-    <section>
-      <input
-        type="text"
-        id="promptInput"
-        placeholder="Contexte / instructions (optionnel)"
-      />
-    </section>
+        <div>
+          <h3>Prompts</h3>
+        </div>
 
-    <!-- Question principale -->
-    <section>
-      <textarea
-        id="questionInput"
-        placeholder="Pose ta question ici…"
-        rows="4"
-      ></textarea>
+        <div>
+          <input id="promptTitle" type="text" placeholder="Titre du prompt" />
+          <textarea id="promptText" rows="6" placeholder="Ton prompt / contexte..."></textarea>
+        </div>
 
-      <button id="sendBtn">Envoyer</button>
-    </section>
+        <div>
+          <button id="btnNewPrompt">Nouveau</button>
+          <button id="btnSavePrompt">Sauver</button>
+          <button id="btnDeletePrompt">Supprimer</button>
+        </div>
 
-    <!-- Zone réponse (large & lisible) -->
-    <section>
-      <div id="loading" hidden>⏳ Réflexion en cours…</div>
+        <div>
+          <select id="promptList" size="10" style="width:100%;">
+            <!-- items -->
+          </select>
+        </div>
 
-      <div id="answerBox">
-        <!-- Réponse ChatGPT ici -->
-      </div>
-    </section>
+      </aside>
+
+      <!-- RIGHT: Ask UI -->
+      <section id="askPane">
+
+        <header>
+          <h2>Ask ChatGPT</h2>
+
+          <select id="langSel">
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+            <option value="kh">ខ្មែរ</option>
+          </select>
+        </header>
+
+        <section>
+          <textarea id="questionInput" placeholder="Pose ta question ici…" rows="4"></textarea>
+          <button id="sendBtn">Envoyer</button>
+        </section>
+
+        <section>
+          <div id="loading" hidden>⏳ Réflexion en cours…</div>
+          <div id="answerBox"><!-- Réponse ici --></div>
+        </section>
+
+      </section>
+
+    </div>
 
   </main>
 
 </body>
+
 </html>
