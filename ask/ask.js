@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
   $("btnClearAnswer").addEventListener("click", clearAnswer);
 
   // Enter to send (question input)
-  $("questionInput").addEventListener("keydown", (e) => {
+ // $("questionInput").addEventListener("keydown", (e) => {
     if (e.key === "Enter") sendQuestion();
   });
 });
