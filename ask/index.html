@@ -16,13 +16,15 @@
     <!-- LEFT: Prompt Library -->
     <aside id="sidebar">
       <div class="side-head">
-        <h3>Prompts</h3>
+        <h3>Prompts  សួរអេអាយ(AI) គ្រប់ចម្ងល់</h3>
       </div>
+        <p>Langue de Reponse :</p> 
         <select id="langSel" aria-label="Langue">
           <option value="fr">Français</option>
           <option value="en">English</option>
           <option value="kh">ខ្មែរ</option>
         </select>
+        <p>selection un prompt existant</p>
         <select id="promptPick" aria-label="Nom du prompt">
           <!-- rempli par JS -->
         </select>
@@ -43,7 +45,7 @@
 
         <div class="pane">
           <div class="pane-head">
-            <strong>Prompt (édition)</strong>
+            <strong>Prompt (édition)       Nom du prompt selectionné </strong>
             <span class="spacer"></span>
             <input id="promptTitle" type="text" placeholder="Titre du prompt" />
             <button id="btnNewPrompt" type="button">+ Nouveau</button>
@@ -58,7 +60,7 @@
 
         <div class="pane">
           <div class="pane-head">
-            <strong>Réponse</strong>
+            <strong>Réponse  នេះជាចម្លើយរបស់ អេអាយ (AI) </strong>
             <span class="spacer"></span>
             <div id="loading" hidden>⏳ Réflexion…</div>
             <button id="btnCopyAnswer" type="button">Copier</button>
