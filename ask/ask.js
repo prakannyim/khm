@@ -206,6 +206,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Enter to send (question input)
  // $("questionInput").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") sendQuestion();
+  //  if (e.key === "Enter") sendQuestion();
   });
 
