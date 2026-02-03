@@ -57,7 +57,9 @@ function renderPrompts(filterText = "") {
       opt.textContent = p.title || "(Sans titre)";
       if (p.id === activeId) opt.selected = true;
       $("promptPick").appendChild(opt);
-    });
+      }
+      $("promptPick").appendChild("Nouveau Prompt");
+    );
 }
 
 function applyPromptById(id) {
