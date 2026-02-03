@@ -1,0 +1,71 @@
+/* Layout: 2 colonnes */
+#app {
+  height: 100vh;
+  display: flex;        /* <-- clé */
+  gap: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* Colonne gauche */
+#sidebar {
+  width: 320px;
+  flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Colonne droite */
+#main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0; /* important pour éviter overflow */
+}
+
+/* Topbar sur une ligne */
+#topbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#topbar select { width: 160px; }
+#questionInput { flex: 1 1 auto; min-width: 0; }
+
+/* Zones bas */
+#panes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.pane-head {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.pane-head .spacer {
+  flex: 1 1 auto;
+}
+
+/* Textareas prennent la place */
+#promptText, #answerText {
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 180px;
+  box-sizing: border-box;
+}
