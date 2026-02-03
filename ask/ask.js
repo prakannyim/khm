@@ -37,14 +37,15 @@ function renderPrompts(filterText = "") {
     .filter(p => !f || (p.title || "").toLowerCase().includes(f));
 
   // Left list
-  $("promptList").innerHTML = "";
-  filtered.forEach(p => {
-    const opt = document.createElement("option");
-    opt.value = p.id;
-    opt.textContent = p.title || "(Sans titre)";
-    if (p.id === activeId) opt.selected = true;
-    $("promptList").appendChild(opt);
-  });
+  //$("promptList").innerHTML = "";
+  //filtered.forEach(p => {
+  //  const opt = document.createElement("option");
+  //  opt.value = p.id;
+  //  opt.textContent = p.title || "(Sans titre)";
+  //  if (p.id === activeId) opt.selected = true;
+  //  $("promptList").appendChild(opt);
+  // }
+  // );
 
   // Top picker (all prompts)
   $("promptPick").innerHTML = "";
@@ -57,7 +58,8 @@ function renderPrompts(filterText = "") {
       opt.textContent = p.title || "(Sans titre)";
       if (p.id === activeId) opt.selected = true;
       $("promptPick").appendChild(opt);
-    });
+      }
+    );
 }
 
 function applyPromptById(id) {
