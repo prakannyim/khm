@@ -109,3 +109,13 @@
   }
 }
 
+@media (max-width: 900px) and (orientation: portrait){
+  .pane-head{
+    flex-wrap: wrap;
+  }
+
+  #promptTitle{
+    flex: 1 1 80%;
+    max-width: 80%;
+  }
+}
