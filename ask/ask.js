@@ -130,7 +130,7 @@ function deleteCurrentPrompt() {
 async function sendQuestion() {
   const lang = $("langSel").value || "fr";
   const prompt = ($("promptText").value || "").trim();
-  const question = ($("questionInput").value || "").trim();
+  const question = ($("promptText").value || "").trim();
 
   if (!question) {
     $("answerText").value = "Question vide.";
