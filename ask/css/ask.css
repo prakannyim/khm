@@ -69,6 +69,11 @@
   min-height: 180px;
   box-sizing: border-box;
 }
+#promptText{
+  height: 220px;      /* ajuste si besoin */
+  max-height: 220px;
+}
+
 @media (max-width: 900px){
   #app{
     flex-direction: column;
