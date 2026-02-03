@@ -187,12 +187,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (active) applyPromptById(active);
 
   // left list selection
-  $("promptList").addEventListener("change", (e) => applyPromptById(e.target.value));
+  //  $("promptList").addEventListener("change", (e) => applyPromptById(e.target.value));
   // top picker selection
   $("promptPick").addEventListener("change", (e) => applyPromptById(e.target.value));
 
   // search
-  $("promptSearch").addEventListener("input", () => renderPrompts($("promptSearch").value || ""));
+ // $("promptSearch").addEventListener("input", () => renderPrompts($("promptSearch").value || ""));
 
   // actions
   $("btnNewPrompt").addEventListener("click", newPrompt);
