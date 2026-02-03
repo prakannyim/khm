@@ -18,14 +18,14 @@
       <div class="side-head">
         <h3>Prompts</h3>
       </div>
-
-      <div class="side-search">
-        <input id="promptSearch" type="text" placeholder="Rechercher…" />
-      </div>
-
-      <select id="promptList" size="18" aria-label="Liste des prompts">
-        <!-- rempli par JS -->
-      </select>
+        <select id="langSel" aria-label="Langue">
+          <option value="fr">Français</option>
+          <option value="en">English</option>
+          <option value="kh">ខ្មែរ</option>
+        </select>
+        <select id="promptPick" aria-label="Nom du prompt">
+          <!-- rempli par JS -->
+        </select>
 
       <div class="side-actions">
       </div>
@@ -36,19 +36,6 @@
 
       <!-- TOP BAR: one line -->
       <header id="topbar">
-        <select id="langSel" aria-label="Langue">
-          <option value="fr">Français</option>
-          <option value="en">English</option>
-          <option value="kh">ខ្មែរ</option>
-        </select>
-
-        <select id="promptPick" aria-label="Nom du prompt">
-          <!-- rempli par JS -->
-        </select>
-
-        <input id="questionInput" type="text" placeholder="Ta question…" />
-
-        <button id="sendBtn" type="button">Envoyer</button>
       </header>
 
       <!-- BOTTOM: prompt + answer -->
@@ -62,6 +49,8 @@
             <button id="btnNewPrompt" type="button">+ Nouveau</button>
             <button id="btnSavePrompt" type="button">Sauver</button>
             <button id="btnDeletePrompt" type="button">Supprimer</button>
+            <button id="sendBtn" type="button">Envoyer</button>
+
           </div>
 
           <textarea id="promptText" rows="10" placeholder="Écris/colle ton prompt ici…"></textarea>
