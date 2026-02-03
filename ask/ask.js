@@ -1,6 +1,7 @@
 const $ = (id) => document.getElementById(id);
 
-let API_BASE = "https://api.khmvoice.org";
+let API_BASE = "https://ask-api-r25z.onrender.com";
+
 const LANG_KEY = "khmvoice.ask.lang.v1";
 const KEY = "khmvoice.ask.prompts.v1";
 
