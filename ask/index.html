@@ -3,65 +3,86 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>KHM Ask</title>
-  <link rel="stylesheet" href="/ask/ask.css">
+  <title>Ask ChatGPT</title>
 
+  <!-- Mets ton CSS si tu en as un -->
+  <link rel="stylesheet" href="/ask/ask.css" />
+  <script src="/ask/ask.js" defer></script>
 </head>
+
 <body>
+  <div id="app">
 
-  <main id="askApp">
-    <div id="layout">
+    <!-- LEFT: Prompt Library -->
+    <aside id="sidebar">
+      <div class="side-head">
+        <h3>Prompts</h3>
+        <button id="btnNewPrompt" type="button">+ Nouveau</button>
+      </div>
 
-      <!-- LEFT: Prompts -->
-      <aside id="promptMenu">
-        <div>
-          <h3>Prompts</h3>
+      <div class="side-search">
+        <input id="promptSearch" type="text" placeholder="Rechercher…" />
+      </div>
+
+      <select id="promptList" size="18" aria-label="Liste des prompts">
+        <!-- rempli par JS -->
+      </select>
+
+      <div class="side-actions">
+        <button id="btnDeletePrompt" type="button">Supprimer</button>
+      </div>
+    </aside>
+
+    <!-- RIGHT: Editor + Ask -->
+    <main id="main">
+
+      <!-- TOP BAR: one line -->
+      <header id="topbar">
+        <select id="langSel" aria-label="Langue">
+          <option value="fr">Français</option>
+          <option value="en">English</option>
+          <option value="kh">ខ្មែរ</option>
+        </select>
+
+        <select id="promptPick" aria-label="Nom du prompt">
+          <!-- rempli par JS -->
+        </select>
+
+        <input id="questionInput" type="text" placeholder="Ta question…" />
+
+        <button id="sendBtn" type="button">Envoyer</button>
+      </header>
+
+      <!-- BOTTOM: prompt + answer -->
+      <section id="panes">
+
+        <div class="pane">
+          <div class="pane-head">
+            <strong>Prompt (édition)</strong>
+            <span class="spacer"></span>
+            <input id="promptTitle" type="text" placeholder="Titre du prompt" />
+            <button id="btnSavePrompt" type="button">Sauver</button>
+          </div>
+
+          <textarea id="promptText" rows="10" placeholder="Écris/colle ton prompt ici…"></textarea>
         </div>
 
-        <div>
-          <input id="promptTitle" type="text" placeholder="Titre du prompt" />
-          <textarea id="promptText" rows="7" placeholder="Ton prompt / contexte..."></textarea>
+        <div class="pane">
+          <div class="pane-head">
+            <strong>Réponse</strong>
+            <span class="spacer"></span>
+            <div id="loading" hidden>⏳ Réflexion…</div>
+            <button id="btnCopyAnswer" type="button">Copier</button>
+            <button id="btnClearAnswer" type="button">Effacer</button>
+          </div>
+
+          <textarea id="answerText" rows="14" readonly placeholder="La réponse s’affiche ici…"></textarea>
         </div>
 
-        <div>
-          <button id="btnNewPrompt">Nouveau</button>
-          <button id="btnSavePrompt">Sauver</button>
-          <button id="btnDeletePrompt">Supprimer</button>
-        </div>
-
-        <div>
-          <select id="promptList" size="12" style="width:100%;">
-            <!-- rempli par JS -->
-          </select>
-        </div>
-      </aside>
-
-      <!-- RIGHT: Ask -->
-      <section id="askPane">
-        <header>
-          <h2>Ask ChatGPT</h2>
-
-          <select id="langSel">
-            <option value="fr">Français</option>
-            <option value="en">English</option>
-            <option value="kh">ខ្មែរ</option>
-          </select>
-        </header>
-
-        <section>
-          <textarea id="questionInput" placeholder="Pose ta question ici…" rows="4"></textarea>
-          <button id="sendBtn">Envoyer</button>
-        </section>
-
-        <section>
-          <div id="loading" hidden>⏳ Réflexion en cours…</div>
-          <div id="answerBox"></div>
-        </section>
       </section>
 
-    </div>
-  </main>
+    </main>
+
+  </div>
 </body>
-
-
 </html>

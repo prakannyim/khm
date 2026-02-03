@@ -1,11 +1,10 @@
-
-let API_BASE = "https://ask-api-r25z.onrender.com";
-
 // ===== CONFIG =====
-const PROMPTS_KEY = "khmvoice.ask.prompts.v1";
-const ACTIVE_PROMPT_KEY = "khmvoice.ask.activePromptId.v1";
+let API_BASE = "https://ask-api-r25z.onrender.com"; // <-- ton API
 
-// ===== Helpers =====
+const PROMPTS_KEY = "khmvoice.ask.prompts.v2";
+const ACTIVE_PROMPT_KEY = "khmvoice.ask.activePromptId.v2";
+
+// ===== Storage helpers =====
 function loadPrompts() {
   try { return JSON.parse(localStorage.getItem(PROMPTS_KEY) || "[]"); }
   catch { return []; }
@@ -23,13 +22,32 @@ function setActivePromptId(id) {
   localStorage.setItem(ACTIVE_PROMPT_KEY, id || "");
 }
 
-// ===== UI Prompts =====
-function renderPromptList() {
-  const list = document.getElementById("promptList");
+// ===== DOM =====
+const $ = (id) => document.getElementById(id);
+
+// ===== Render lists (left list + top picker) =====
+function renderPrompts(filterText = "") {
   const prompts = loadPrompts();
   const activeId = getActivePromptId();
+  const f = filterText.trim().toLowerCase();
 
-  list.innerHTML = "";
+  const filtered = prompts
+    .slice()
+    .sort((a, b) => (a.title || "").localeCompare(b.title || ""))
+    .filter(p => !f || (p.title || "").toLowerCase().includes(f));
+
+  // Left list
+  $("promptList").innerHTML = "";
+  filtered.forEach(p => {
+    const opt = document.createElement("option");
+    opt.value = p.id;
+    opt.textContent = p.title || "(Sans titre)";
+    if (p.id === activeId) opt.selected = true;
+    $("promptList").appendChild(opt);
+  });
+
+  // Top picker (all prompts)
+  $("promptPick").innerHTML = "";
   prompts
     .slice()
     .sort((a, b) => (a.title || "").localeCompare(b.title || ""))
@@ -38,7 +56,7 @@ function renderPromptList() {
       opt.value = p.id;
       opt.textContent = p.title || "(Sans titre)";
       if (p.id === activeId) opt.selected = true;
-      list.appendChild(opt);
+      $("promptPick").appendChild(opt);
     });
 }
 
@@ -46,41 +64,48 @@ function applyPromptById(id) {
   const prompts = loadPrompts();
   const p = prompts.find(x => x.id === id);
 
-  document.getElementById("promptTitle").value = p?.title || "";
-  document.getElementById("promptText").value = p?.text || "";
+  $("promptTitle").value = p?.title || "";
+  $("promptText").value = p?.text || "";
 
   setActivePromptId(p?.id || "");
-  renderPromptList();
+  renderPrompts($("promptSearch").value || "");
 }
 
 function newPrompt() {
-  document.getElementById("promptTitle").value = "";
-  document.getElementById("promptText").value = "";
-  setActivePromptId("");
-  renderPromptList();
+  const prompts = loadPrompts();
+  const id = uid();
+  const title = "Nouveau prompt";
+  const text = "";
+
+  prompts.push({ id, title, text });
+  savePrompts(prompts);
+
+  setActivePromptId(id);
+  applyPromptById(id);
 }
 
 function saveCurrentPrompt() {
-  const title = (document.getElementById("promptTitle").value || "").trim();
-  const text  = (document.getElementById("promptText").value || "").trim();
-
-  if (!title && !text) return;
+  const title = ($("promptTitle").value || "").trim() || "(Sans titre)";
+  const text = ($("promptText").value || "").trim();
+  let id = getActivePromptId();
 
   const prompts = loadPrompts();
-  let id = getActivePromptId();
 
   if (!id) {
     id = uid();
-    prompts.push({ id, title: title || "Nouveau prompt", text });
+    prompts.push({ id, title, text });
   } else {
     const idx = prompts.findIndex(p => p.id === id);
-    if (idx >= 0) prompts[idx] = { ...prompts[idx], title: title || "(Sans titre)", text };
-    else prompts.push({ id, title: title || "(Sans titre)", text });
+    if (idx >= 0) prompts[idx] = { ...prompts[idx], title, text };
+    else prompts.push({ id, title, text });
   }
 
   savePrompts(prompts);
   setActivePromptId(id);
-  renderPromptList();
+  renderPrompts($("promptSearch").value || "");
+  // resync selects
+  $("promptPick").value = id;
+  $("promptList").value = id;
 }
 
 function deleteCurrentPrompt() {
@@ -91,26 +116,29 @@ function deleteCurrentPrompt() {
   savePrompts(prompts);
 
   const next = prompts[0]?.id || "";
+  setActivePromptId(next);
+
   if (next) applyPromptById(next);
-  else newPrompt();
+  else {
+    $("promptTitle").value = "";
+    $("promptText").value = "";
+    renderPrompts($("promptSearch").value || "");
+  }
 }
 
-// ===== Send to API =====
+// ===== Ask API =====
 async function sendQuestion() {
-  const lang = document.getElementById("langSel").value || "fr";
-  const prompt = (document.getElementById("promptText").value || "").trim();
-  const question = (document.getElementById("questionInput").value || "").trim();
-
-  const answerBox = document.getElementById("answerBox");
-  const loading = document.getElementById("loading");
+  const lang = $("langSel").value || "fr";
+  const prompt = ($("promptText").value || "").trim();
+  const question = ($("questionInput").value || "").trim();
 
   if (!question) {
-    answerBox.innerText = "Question vide.";
+    $("answerText").value = "Question vide.";
     return;
   }
 
-  loading.hidden = false;
-  answerBox.innerText = "";
+  $("loading").hidden = false;
+  $("answerText").value = "";
 
   try {
     const r = await fetch(API_BASE + "/api/chat", {
@@ -120,36 +148,62 @@ async function sendQuestion() {
     });
 
     const data = await r.json();
-    loading.hidden = true;
+    $("loading").hidden = true;
 
     if (!r.ok) {
-      answerBox.innerText = data?.error
+      $("answerText").value = data?.error
         ? (data.error + (data.detail ? ("\n" + data.detail) : ""))
         : "Erreur API.";
       return;
     }
 
-    answerBox.innerText = data.answer || "Aucune réponse.";
-    answerBox.scrollIntoView({ behavior: "smooth" });
+    $("answerText").value = data.answer || "";
   } catch (e) {
-    loading.hidden = true;
-    answerBox.innerText = "Erreur de connexion.";
+    $("loading").hidden = true;
+    $("answerText").value = "Erreur de connexion.";
   }
+}
+
+// ===== Answer utilities =====
+function copyAnswer() {
+  const text = $("answerText").value || "";
+  if (!text) return;
+  navigator.clipboard?.writeText(text);
+}
+
+function clearAnswer() {
+  $("answerText").value = "";
 }
 
 // ===== Wiring =====
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("btnNewPrompt").addEventListener("click", newPrompt);
-  document.getElementById("btnSavePrompt").addEventListener("click", saveCurrentPrompt);
-  document.getElementById("btnDeletePrompt").addEventListener("click", deleteCurrentPrompt);
+  // init lists
+  renderPrompts("");
 
-  document.getElementById("promptList").addEventListener("change", (e) => {
-    applyPromptById(e.target.value);
-  });
-
-  document.getElementById("sendBtn").addEventListener("click", sendQuestion);
-
-  renderPromptList();
+  // restore active
   const active = getActivePromptId();
   if (active) applyPromptById(active);
+
+  // left list selection
+  $("promptList").addEventListener("change", (e) => applyPromptById(e.target.value));
+  // top picker selection
+  $("promptPick").addEventListener("change", (e) => applyPromptById(e.target.value));
+
+  // search
+  $("promptSearch").addEventListener("input", () => renderPrompts($("promptSearch").value || ""));
+
+  // actions
+  $("btnNewPrompt").addEventListener("click", newPrompt);
+  $("btnSavePrompt").addEventListener("click", saveCurrentPrompt);
+  $("btnDeletePrompt").addEventListener("click", deleteCurrentPrompt);
+
+  $("sendBtn").addEventListener("click", sendQuestion);
+
+  $("btnCopyAnswer").addEventListener("click", copyAnswer);
+  $("btnClearAnswer").addEventListener("click", clearAnswer);
+
+  // Enter to send (question input)
+  $("questionInput").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendQuestion();
+  });
 });
