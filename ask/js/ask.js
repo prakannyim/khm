@@ -266,9 +266,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function handleInstall() {
-  if (!deferredInstallPrompt) return;
+  //if (!deferredInstallPrompt) return;
   deferredInstallPrompt.prompt();
   await deferredInstallPrompt.userChoice;
   deferredInstallPrompt = null;
   document.getElementById("btnInstall").hidden = true;
 }
+
