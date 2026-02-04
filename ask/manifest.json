@@ -1,0 +1,22 @@
+{
+  "name": "KHM Voice – Ask AI",
+  "short_name": "Ask AI",
+  "description": "Poser des questions à l’IA – texte et audio",
+  "start_url": "/ask/",
+  "display": "standalone",
+  "background_color": "#0f1a16",
+  "theme_color": "#2c6e49",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/ask/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/ask/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

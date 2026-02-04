@@ -9,8 +9,16 @@
   <link rel="stylesheet" href="ask/css/ask.css" />
   <script src="ask/js/ask.js" defer></script>
   <script src="ask/js/audio.js" defer></script>
+ 
+ <link rel="manifest" href="/ask/manifest.json">
+ <meta name="theme-color" content="#2c6e49">
 
 </head>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/ask/service-worker.js");
+}
+</script>
 
 <body>
   <div id="app">
