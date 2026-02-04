@@ -57,6 +57,10 @@
             <button id="btnSavePrompt" type="button">Sauver</button>
             <button id="btnDeletePrompt" type="button">Supprimer</button>
             <button id="sendBtn" type="button">Envoyer</button>
+            <button id="btnSpeak" type="button">🔊 Lire</button>
+            <button id="btnTTS" type="button" disabled>🎙️ Audio (XTTS/MMS)</button>
+            <button id="btnInstall" type="button" hidden>Installer</button>
+
 
           </div>
 
@@ -73,6 +77,8 @@
           </div>
 
           <textarea id="answerText" rows="14" readonly placeholder="La réponse s’affiche ici…"></textarea>
+          <audio id="audioPlayer" controls style="width:100%; margin-top:10px;" hidden></audio>
+
         </div>
 
       </section>
