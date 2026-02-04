@@ -176,6 +176,49 @@ function copyAnswer() {
 function clearAnswer() {
   $("answerText").value = "";
 }
+function speakAnswer() {
+  const text = document.getElementById("answerText").value || "";
+  if (!text) return;
+
+  const lang = document.getElementById("langSel").value || "fr";
+  const u = new SpeechSynthesisUtterance(text);
+
+  if (lang === "fr") u.lang = "fr-FR";
+  else if (lang === "en") u.lang = "en-US";
+  else if (lang === "kh") u.lang = "km-KH"; // selon support navigateur
+
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+
+async function generateTTS() {
+  const text = document.getElementById("answerText").value || "";
+  if (!text) return;
+
+  const lang = document.getElementById("langSel").value || "fr";
+
+  // Exemple futur endpoint: POST /api/tts -> renvoie audio/mpeg ou audio/wav
+  const r = await fetch(API_BASE + "/api/tts", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ lang, text })
+  });
+
+  if (!r.ok) {
+    alert("TTS indisponible pour le moment.");
+    return;
+  }
+
+  const blob = await r.blob();
+  const url = URL.createObjectURL(blob);
+
+  const audio = document.getElementById("audioPlayer");
+  audio.src = url;
+  audio.hidden = false;
+  audio.play();
+}
+
+document.getElementById("btnTTS").disabled = false;
 
 // ===== Wiring =====
 document.addEventListener("DOMContentLoaded", () => {
@@ -209,3 +252,23 @@ document.addEventListener("DOMContentLoaded", () => {
   //  if (e.key === "Enter") sendQuestion();
   });
 
+  let deferredInstallPrompt = null;
+
+  document.getElementById("btnInstall").addEventListener("click", handleInstall);
+  document.getElementById("btnSpeak").addEventListener("click", speakAnswer);
+  document.getElementById("btnTTS").addEventListener("click", generateTTS);
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  const btn = document.getElementById("btnInstall");
+  btn.hidden = false;
+});
+
+async function handleInstall() {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+  document.getElementById("btnInstall").hidden = true;
+}
